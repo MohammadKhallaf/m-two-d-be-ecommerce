@@ -23,8 +23,9 @@ class ProductsManager {
   /*---------- file system ---------------*/
 
   async loadProducts() {
+    console.log("Run loading function");
     const products = await fs.readFile(filePath, "utf-8");
-    this.products = products;
+    this.products = JSON.parse(products);
   }
 
   async saveProducts() {
@@ -32,9 +33,31 @@ class ProductsManager {
   }
 
   /*---------- /file system ---------------*/
+
   // CRUD
+
   // Read
   async getAll() {
+    await this.loadProducts();
+    //
     return this.products;
   }
+
+  async getOne(title) {
+    await this.loadProducts();
+    console.log(typeof this.products);
+    const idx = this.products.findIndex((item) => {
+      return item.title === title;
+      // boolean --> comparison
+    });
+
+    return this.products[idx];
+
+    // .find
+
+    // .findIndex
+  }
+  // async;
 }
+
+module.exports = ProductsManager;
