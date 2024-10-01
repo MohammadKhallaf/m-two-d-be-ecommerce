@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const productsRoutes = require("./routes/products-routes");
 const userRoutes = require("./routes/user-routes");
+const cartRoutes = require("./routes/cart-routes");
 const app = express();
 
 mongoose.connect("mongodb://localhost:27017/m2d-commerce");
@@ -24,7 +25,7 @@ app.get("/", (req, res) => {
 
 app.use("/products", productsRoutes);
 app.use("/user", userRoutes);
-
+app.use("/cart", cartRoutes);
 // app.use('/user',usersRoutes)
 // borg/industrial/ind-4
 app.listen(3000, () => {
